@@ -439,6 +439,10 @@
     if (timeoutId) clearTimeout(timeoutId);
   }
 
+  function removeHighlights() {
+    document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
+  }
+
   function speakText(text, onEnd) {
     if (currentLang !== 'en') {
       // No reproducir voz en español
@@ -472,7 +476,7 @@
   }
 
   function highlightElement(id) {
-    document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
+    removeHighlights();
     const el = document.getElementById(id);
     if (el) {
       el.classList.add('section-highlight');
@@ -512,7 +516,7 @@
     if (index >= guideSteps.length) {
       guideActive = false;
       currentStepIndex = 0;
-      document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
+      removeHighlights();
       const finishMsg = "Guide finished. Explore the site on your own.";
       speakText(finishMsg, null);
       return;
@@ -526,18 +530,26 @@
     });
   }
 
-  function startGuide() {
-    if (currentLang !== 'en') {
-      // No activar guía de voz en español, pero podemos hacer un resaltado visual si se desea
-      // Por simplicidad, no hacemos nada (el botón no hará nada en español)
-      return;
-    }
+  function stopGuide() {
     if (guideActive) {
       stopSpeaking();
       guideActive = false;
       currentStepIndex = 0;
-      document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
+      removeHighlights();
     }
+  }
+
+  function startGuide() {
+    if (currentLang !== 'en') {
+      // No activar guía de voz en español
+      return;
+    }
+    // Si ya está activa, la detenemos (toggle: stop)
+    if (guideActive) {
+      stopGuide();
+      return;
+    }
+    // Iniciar guía
     guideActive = true;
     currentStepIndex = 0;
     const introMsg = "Starting interactive guide for QCOL. I will explain each section of the site step by step.";
@@ -550,12 +562,7 @@
   async function setLanguage(lang) {
     if (lang === currentLang) return;
     // Detener la guía actual si está activa
-    if (guideActive) {
-      stopSpeaking();
-      guideActive = false;
-      currentStepIndex = 0;
-      document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
-    }
+    if (guideActive) stopGuide();
     currentLang = lang;
     // Actualizar textos de la interfaz
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -571,8 +578,8 @@
       await updateVoice();
       startGuide();  // Iniciar guía automática al volver a inglés
     } else {
-      // En español, no hay voz, pero podríamos mostrar un mensaje visual opcional
-      // No hacemos nada adicional
+      // En español, no hay voz, pero aseguramos que no quede nada activo
+      removeHighlights();
     }
   }
 
