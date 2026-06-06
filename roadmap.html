@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>QCOL · Roadmap · Puzzle Architecture Model</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050b);
+      color: #eef2ff;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    .quantum-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+      background-image: radial-gradient(circle at 20% 40%, rgba(0,255,255,0.08) 1px, transparent 1px),
+                        radial-gradient(circle at 80% 70%, rgba(170,90,255,0.08) 1px, transparent 1px);
+      background-size: 48px 48px, 32px 32px;
+    }
+    .container {
+      max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem;
+      position: relative; z-index: 2;
+    }
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(100,150,255,0.2); padding-bottom: 1rem;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 0.85rem; cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    .logo:hover { transform: scale(1.02); }
+    .logo-icon {
+      filter: drop-shadow(0 0 12px rgba(0,200,255,.7));
+      width: 52px;
+      height: 52px;
+    }
+    .logo-text-wrap { display: flex; flex-direction: column; }
+    .logo-qcol { display: flex; align-items: baseline; gap: 0; }
+    .logo-q {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #00ffdd;
+      text-shadow: 0 0 20px rgba(0,255,221,.7);
+      letter-spacing: -0.5px;
+    }
+    .logo-col {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #00ccff;
+      text-shadow: 0 0 12px rgba(0,200,255,.6);
+      letter-spacing: -0.5px;
+    }
+    .logo-sub {
+      font-size: 0.7rem;
+      color: #8b9aff;
+      letter-spacing: 0.3px;
+      margin-top: -4px;
+      font-weight: 500;
+    }
+    .nav-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .lang-switch {
+      display: flex; gap: 0.3rem; background: rgba(255,255,255,0.05);
+      padding: 0.2rem 0.6rem; border-radius: 2rem;
+    }
+    .lang-btn {
+      background: transparent; border: none; color: #b9c8ff; font-weight: 600;
+      cursor: pointer; padding: 0.3rem 0.8rem; border-radius: 2rem;
+      transition: all 0.2s;
+    }
+    .lang-btn.active { background: #2dd4bf; color: #020617; }
+    .btn-ecosystem {
+      background: rgba(16,185,255,0.15); border: 1px solid #2dd4bfaa;
+      padding: 0.5rem 1.2rem; border-radius: 2rem; font-weight: 600;
+      text-decoration: none; color: #b6f0ff; font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .btn-ecosystem:hover { background: #2dd4bf30; border-color: #7dd3fc; }
+    .btn-home {
+      background: rgba(45,212,191,0.2);
+      border: 1px solid #2dd4bf;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #a5f3fc;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-home:hover {
+      background: rgba(45,212,191,0.4);
+      border-color: #7dd3fc;
+      color: white;
+    }
+    .hbtn {
+      background: rgba(16,185,255,0.15); border: 1px solid #2dd4bfaa;
+      padding: 0.5rem 1.2rem; border-radius: 2rem; font-weight: 600;
+      text-decoration: none; color: #b6f0ff; font-size: 0.9rem;
+      transition: 0.2s;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .hbtn:hover { background: #2dd4bf30; border-color: #7dd3fc; }
+    /* Roadmap map style */
+    .roadmap {
+      margin: 3rem 0;
+      position: relative;
+    }
+    .stop {
+      display: flex;
+      margin-bottom: 2rem;
+      position: relative;
+      scroll-margin-top: 100px;
+      transition: all 0.3s ease;
+    }
+    .stop-line {
+      position: absolute;
+      left: 2.2rem;
+      top: 4rem;
+      bottom: -2rem;
+      width: 3px;
+      background: linear-gradient(to bottom, #2dd4bf, #0088cc);
+      z-index: 0;
+    }
+    .stop:last-child .stop-line { display: none; }
+    .stop-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(15,25,45,0.9);
+      border: 2px solid #2dd4bf;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      z-index: 2;
+      background: #0a1225;
+      box-shadow: 0 0 20px rgba(45,212,191,0.3);
+      flex-shrink: 0;
+    }
+    .stop-content {
+      margin-left: 1.5rem;
+      flex: 1;
+      background: rgba(15,25,45,0.65);
+      backdrop-filter: blur(4px);
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid rgba(80,150,255,0.2);
+      transition: 0.2s;
+    }
+    .stop-content:hover {
+      border-color: #2dd4bf;
+      transform: translateX(5px);
+    }
+    .stop-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.2rem;
+      color: #a5f3fc;
+      margin-bottom: 0.5rem;
+    }
+    .stop-desc {
+      font-size: 0.85rem;
+      color: #cbd5f0;
+      line-height: 1.5;
+    }
+    .current-flag {
+      background: rgba(255,215,0,0.2);
+      border: 1px solid #ffd700;
+      position: relative;
+    }
+    .current-flag::after {
+      content: "🚩";
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      font-size: 1.8rem;
+    }
+    .padlock {
+      text-align: center;
+      margin: 3rem 0 1rem;
+      padding: 1.5rem;
+      background: rgba(0,0,0,0.4);
+      border-radius: 2rem;
+      border: 1px solid #ffaa66;
+    }
+    .padlock-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    /* Guide button flotante */
+    .guide-btn {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 1000;
+      background: linear-gradient(135deg, #2dd4bf, #0088cc);
+      border: none;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(45,212,191,0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+    }
+    .guide-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 28px rgba(45,212,191,0.9);
+    }
+    .section-highlight {
+      transition: all 0.3s ease;
+      box-shadow: 0 0 0 4px #2dd4bf, 0 0 0 8px rgba(45,212,191,0.3);
+      border-radius: 1rem;
+      background: rgba(45,212,191,0.05);
+    }
+    @media (max-width: 750px) {
+      .stop { flex-direction: column; align-items: flex-start; }
+      .stop-icon { margin-bottom: 0.8rem; }
+      .stop-content { margin-left: 0; }
+      .stop-line { left: 1.8rem; top: 4rem; }
+      .navbar { flex-direction: column; align-items: flex-start; }
+      .guide-btn { width: 48px; height: 48px; font-size: 1.5rem; bottom: 1rem; left: 1rem; }
+      .nav-actions { width: 100%; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="quantum-bg"></div>
+<div class="container">
+  <div class="navbar">
+    <div class="logo" onclick="window.location.href='index.html'">
+      <svg class="logo-icon" width="52" height="52" viewBox="0 0 40 40" fill="none">
+        <line x1="3" y1="12" x2="37" y2="12" stroke="#0055aa" stroke-width="1.2" stroke-dasharray="2 2"/>
+        <line x1="3" y1="20" x2="37" y2="20" stroke="#0055aa" stroke-width="1.2" stroke-dasharray="2 2"/>
+        <line x1="3" y1="28" x2="37" y2="28" stroke="#0055aa" stroke-width="1.2" stroke-dasharray="2 2"/>
+        <rect x="7" y="9" width="7" height="6" rx="1.5" fill="rgba(0,136,255,.15)" stroke="#0088ff" stroke-width="1"/>
+        <text x="10.5" y="14" text-anchor="middle" font-family="monospace" font-size="4" fill="#00ccff">H</text>
+        <circle cx="10.5" cy="20" r="2" fill="#00ffdd"/>
+        <line x1="10.5" y1="20" x2="10.5" y2="25.5" stroke="#00ffdd" stroke-width="1"/>
+        <circle cx="10.5" cy="28" r="2" fill="none" stroke="#00ffdd" stroke-width="1"/>
+        <line x1="8.5" y1="28" x2="12.5" y2="28" stroke="#00ffdd" stroke-width="1"/>
+        <rect x="17" y="17" width="6" height="6" rx="1.5" fill="rgba(0,255,136,.1)" stroke="#00ff88" stroke-width="1"/>
+        <text x="20" y="22" text-anchor="middle" font-family="monospace" font-size="4" fill="#00ff88">X</text>
+        <g transform="translate(28,16) scale(.55)">
+          <circle cx="6" cy="6" r="3.5" fill="none" stroke="#00ccff" stroke-width="1.8"/>
+          <path d="M6 0v2M6 10v2M0 6h2M10 6h2M1.8 1.8l1.4 1.4M8.8 8.8l1.4 1.4M1.8 10.2l1.4-1.4M8.8 3.2l1.4-1.4" stroke="#00ccff" stroke-width="1.3" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <div class="logo-text-wrap">
+        <div class="logo-qcol"><span class="logo-q">Q</span><span class="logo-col">COL</span></div>
+        <div class="logo-sub" data-i18n="tagline">Quantum Cloud OS · Neutral · Open · AI-Native</div>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn active" data-lang="en">EN</button>
+      </div>
+      <a href="https://laffitacamargof-create.github.io/quantum-computing-open-lab/" target="_blank" class="btn-ecosystem">🚀 <span data-i18n="nav_live">Live Ecosystem</span></a>
+      <a href="index.html" class="btn-home">🏠 <span data-i18n="btn_home">Inicio</span></a>
+    </div>
+  </div>
+
+  <h1 style="font-family:'Orbitron'; text-align:center; margin-bottom:0.5rem;" data-i18n="roadmap_title">Hoja de ruta del modelo arquitectura del rompecabezas</h1>
+  <p style="text-align:center; color:#a5f3fc; margin-bottom:2rem;" data-i18n="roadmap_sub">Cada parada es una pieza fundamental del rompecabezas infinito. 🚩 = Posición actual: Quantum App Studio</p>
+
+  <div class="roadmap" id="roadmapContainer">
+    <!-- Stops injected by JS -->
+  </div>
+
+  <div class="padlock">
+    <div class="padlock-icon">🔒</div>
+    <div data-i18n="padlock_title">Arquitectura del modelo de las 3 cajas</div>
+    <div style="font-size:0.8rem; margin-top:0.5rem;" data-i18n="padlock_desc">Neutralidad · Simplicidad Radical · Apertura Total — Los tres pilares fundamentales que sostienen todo el ecosistema.</div>
+  </div>
+</div>
+
+<button class="guide-btn" id="guideButton" aria-label="Interactive guide">🗣️</button>
+
+<script>
+  // Translations for roadmap content (including new button text)
+  const translations = {
+    es: {
+      tagline: "Sistema Operativo Cuántico en la Nube · Neutral · Abierto · IA Nativa",
+      nav_live: "Ecosistema Vivo",
+      btn_home: "Inicio",
+      roadmap_title: "Hoja de ruta del modelo arquitectura del rompecabezas",
+      roadmap_sub: "Cada parada es una pieza fundamental del rompecabezas infinito. 🚩 = Posición actual: Quantum App Studio",
+      padlock_title: "Arquitectura del modelo de las 3 cajas",
+      padlock_desc: "Neutralidad · Simplicidad Radical · Apertura Total — Los tres pilares fundamentales que sostienen todo el ecosistema.",
+      stops: [
+        { title: "🤖 IA Nativa (QuantumChat)", desc: "Hablas o escribes tu problema. QuantumChat lo traduce a circuitos cuánticos o asesora para encontrar la mejor solución posible. Sin comandos, sin código: te responde en lenguaje humano y te da el código si lo necesitas." },
+        { title: "⚙️ Quantum Open Lab", desc: "Editor visual de circuitos cuánticos con ejecución Python real (Qiskit). Diseña y simula circuitos, guárdalos en tu cuenta." },
+        { title: "📓 Quantum Notebook", desc: "Crea y edita cuadernos cuánticos completos. Exporta a .ipynb. Solo fundadores y administradores revisan antes de publicar en Projects. Se combina con Quantum Open Lab en las celdas circuito para crear algoritmos cuánticos sin necesidad de programar." },
+        { title: "📁 Projects", desc: "Explora y publica proyectos de computación cuántica. Comparte ideas, algoritmos, circuitos y folletos interactivos de cuadernos con la comunidad QCOL." },
+        { title: "🧩 Quantum Puzzle", desc: "Tienda de aplicaciones cuánticas (Quantum Apps). Ejecuta programas reales sin instalación. Crea, comparte y ejecuta tus propios experimentos." },
+        { title: "🛠️ Quantum App Studio (🚩 Actual)", desc: "Entorno de desarrollo para construir Quantum Apps. Usa HTML para la interfaz y lógica en Python con las librerías Cirq, Qiskit, PennyLane ya disponibles. Crea, prueba y despliega nuevas herramientas cuánticas. Accede a través de Quantum Puzzle. <strong>📍 Estamos aquí construyendo el futuro.</strong>" },
+        { title: "🗄️ Base de datos", desc: "Almacena cuentas y nombres de usuario. Integración con almacenamiento externo: Google Drive, GitHub, etc. Conectores API para fabricantes de hardware cuántico y servidores." },
+        { title: "📦 Primer paquete de apps / tools cuánticas", desc: "La primera colección de aplicaciones y herramientas cuánticas listas para usar, demostrando el poder del ecosistema." },
+        { title: "🛒 Quantum Puzzle Store", desc: "Los desarrolladores publican Quantum Apps o herramientas. QCOL cobra una comisión del 20% en cada venta o suscripción. El resto va al desarrollador. Hacemos crecer el ecosistema de soluciones cuánticas del mundo y también su acceso y uso." },
+        { title: "🌐 Intérprete universal cuántico", desc: "Conexión agnóstica a cualquier hardware cuántico mediante una capa universal. Soporta Qiskit, Cirq, PennyLane y cualquier procesador cuántico futuro. Elimina la dependencia de un solo fabricante." }
+      ]
+    },
+    en: {
+      tagline: "Quantum Cloud OS · Neutral · Open · AI-Native",
+      nav_live: "Live Ecosystem",
+      btn_home: "Home",
+      roadmap_title: "Roadmap of the puzzle architecture model",
+      roadmap_sub: "Each stop is a fundamental piece of the infinite puzzle. 🚩 = Current position: Quantum App Studio",
+      padlock_title: "Architecture of the 3‑box model",
+      padlock_desc: "Neutrality · Radical Simplicity · Total Openness — The three fundamental pillars that support the entire ecosystem.",
+      stops: [
+        { title: "🤖 Native AI (QuantumChat)", desc: "You speak or write your problem. QuantumChat translates it into quantum circuits or advises to find the best possible solution. No commands, no code – it responds in human language and gives you the code if you need it." },
+        { title: "⚙️ Quantum Open Lab", desc: "Visual quantum circuit editor with real Python execution (Qiskit). Design and simulate quantum circuits, save them to your account." },
+        { title: "📓 Quantum Notebook", desc: "Create and edit complete quantum notebooks. Export to .ipynb. Only founders and administrators review before publishing to Projects. It combines with Quantum Open Lab in circuit cells to create quantum algorithms without needing to program." },
+        { title: "📁 Projects", desc: "Explore and publish quantum computing projects. Share ideas, algorithms, circuits and interactive notebook booklets with the QCOL community." },
+        { title: "🧩 Quantum Puzzle", desc: "Quantum app store. Run real programs without installation. Create, share and run your own experiments." },
+        { title: "🛠️ Quantum App Studio (🚩 Current)", desc: "Development environment to build Quantum Apps. Uses HTML for the interface and Python logic with quantum libraries Cirq, Qiskit, PennyLane already available. Create, test and deploy new quantum tools. Access it through Quantum Puzzle. <strong>📍 We are here, building the future.</strong>" },
+        { title: "🗄️ Database", desc: "Store accounts and usernames. External storage integration: Google Drive, GitHub, etc. API connectors for quantum hardware manufacturers and servers." },
+        { title: "📦 First quantum app / tools package", desc: "The first collection of ready-to-use quantum applications and tools, demonstrating the power of the ecosystem." },
+        { title: "🛒 Quantum Puzzle Store", desc: "Developers publish Quantum Apps or tools. QCOL takes a 20% commission on each sale or subscription. The rest goes to the developer. We grow the worldwide ecosystem of quantum solutions and also its access and use." },
+        { title: "🌐 Universal Quantum Interpreter", desc: "Agnostic connection to any quantum hardware via a universal layer. Supports Qiskit, Cirq, PennyLane and any future quantum processor. Removes vendor lock-in." }
+      ]
+    }
+  };
+
+  let currentLang = 'en';
+  let guideActive = false;
+  let currentStepIndex = 0;
+  let currentUtterance = null;
+  let timeoutId = null;
+  let synth = window.speechSynthesis;
+  let selectedVoice = null;
+
+  // Helper: get best English voice
+  async function getBestEnglishVoice() {
+    return new Promise((resolve) => {
+      const getVoices = () => {
+        const voices = synth.getVoices();
+        if (voices.length === 0) {
+          synth.onvoiceschanged = () => resolve(findBestEnglishVoice(synth.getVoices()));
+        } else {
+          resolve(findBestEnglishVoice(voices));
+        }
+      };
+      getVoices();
+    });
+  }
+  function findBestEnglishVoice(voices) {
+    let best = voices.find(v => v.lang === 'en-US' && (v.name.includes('Google') || v.name.includes('Natural')));
+    if (!best) best = voices.find(v => v.lang === 'en-US');
+    if (!best) best = voices.find(v => v.lang.startsWith('en'));
+    return best || null;
+  }
+  async function updateVoice() {
+    selectedVoice = await getBestEnglishVoice();
+  }
+
+  function stopSpeaking() {
+    if (currentUtterance) {
+      synth.cancel();
+      currentUtterance = null;
+    }
+    if (timeoutId) clearTimeout(timeoutId);
+  }
+
+  function speakText(text, onEnd) {
+    if (currentLang !== 'en') return;
+    stopSpeaking();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.85;
+    utterance.pitch = 1.0;
+    utterance.volume = 1;
+    if (selectedVoice) utterance.voice = selectedVoice;
+    utterance.onend = () => {
+      currentUtterance = null;
+      if (onEnd) onEnd();
+    };
+    utterance.onerror = () => {
+      currentUtterance = null;
+      if (onEnd) onEnd();
+    };
+    currentUtterance = utterance;
+    synth.speak(utterance);
+    timeoutId = setTimeout(() => {
+      if (currentUtterance) {
+        synth.cancel();
+        currentUtterance = null;
+        if (onEnd) onEnd();
+      }
+    }, Math.max(text.length * 70, 5000));
+  }
+
+  function highlightElement(element) {
+    document.querySelectorAll('.stop').forEach(el => el.classList.remove('section-highlight'));
+    if (element) element.classList.add('section-highlight');
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Render roadmap stops
+  function renderRoadmap() {
+    const container = document.getElementById('roadmapContainer');
+    const stopsData = translations[currentLang].stops;
+    container.innerHTML = '';
+    stopsData.forEach((stop, idx) => {
+      const stopDiv = document.createElement('div');
+      stopDiv.className = 'stop';
+      if (idx === 5) stopDiv.classList.add('current-flag');
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'stop-line';
+      const iconDiv = document.createElement('div');
+      iconDiv.className = 'stop-icon';
+      const emojiMatch = stop.title.match(/^([\u{1F300}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]+)/u);
+      iconDiv.textContent = emojiMatch ? emojiMatch[0] : '🔹';
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'stop-content';
+      const titleSpan = document.createElement('div');
+      titleSpan.className = 'stop-title';
+      titleSpan.innerHTML = stop.title;
+      const descSpan = document.createElement('div');
+      descSpan.className = 'stop-desc';
+      descSpan.innerHTML = stop.desc;
+      contentDiv.appendChild(titleSpan);
+      contentDiv.appendChild(descSpan);
+      stopDiv.appendChild(iconDiv);
+      stopDiv.appendChild(lineDiv);
+      stopDiv.appendChild(contentDiv);
+      container.appendChild(stopDiv);
+    });
+    // Update static texts
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) el.innerText = translations[currentLang][key];
+    });
+    const padlockTitle = document.querySelector('.padlock div[data-i18n="padlock_title"]');
+    const padlockDesc = document.querySelector('.padlock div[data-i18n="padlock_desc"]');
+    if (padlockTitle) padlockTitle.innerText = translations[currentLang].padlock_title;
+    if (padlockDesc) padlockDesc.innerText = translations[currentLang].padlock_desc;
+  }
+
+  // Guide steps (using stop elements)
+  function getStopElements() {
+    return document.querySelectorAll('.stop');
+  }
+
+  function runGuideStep(index) {
+    if (!guideActive) return;
+    const stops = getStopElements();
+    if (index >= stops.length) {
+      guideActive = false;
+      currentStepIndex = 0;
+      highlightElement(null);
+      const finishMsg = "Guide finished. You have completed the roadmap tour.";
+      speakText(finishMsg, null);
+      return;
+    }
+    const stopEl = stops[index];
+    highlightElement(stopEl);
+    const titleEl = stopEl.querySelector('.stop-title');
+    const descEl = stopEl.querySelector('.stop-desc');
+    let text = '';
+    if (titleEl && descEl) {
+      text = `Stop ${index+1}: ${titleEl.innerText}. ${descEl.innerText}`;
+      if (index === 5) text += " This is our current location, marked with a flag. We are actively building Quantum App Studio.";
+    } else {
+      text = `Stop ${index+1}`;
+    }
+    speakText(text, () => {
+      if (guideActive) runGuideStep(index + 1);
+    });
+  }
+
+  function startGuide() {
+    if (currentLang !== 'en') return;
+    if (guideActive) {
+      stopSpeaking();
+      guideActive = false;
+      currentStepIndex = 0;
+      highlightElement(null);
+      return;
+    }
+    guideActive = true;
+    currentStepIndex = 0;
+    const introMsg = "Starting interactive roadmap guide for QCOL architecture. I will explain each stop step by step.";
+    speakText(introMsg, () => {
+      if (guideActive) runGuideStep(0);
+    });
+  }
+
+  // Set language and re-render, reset guide
+  async function setLanguage(lang) {
+    if (lang === currentLang) return;
+    if (guideActive) {
+      stopSpeaking();
+      guideActive = false;
+      currentStepIndex = 0;
+      highlightElement(null);
+    }
+    currentLang = lang;
+    renderRoadmap();
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+    if (lang === 'en') {
+      await updateVoice();
+      setTimeout(() => { startGuide(); }, 500);
+    }
+  }
+
+  // Initialize
+  window.addEventListener('load', async () => {
+    renderRoadmap();
+    await updateVoice();
+    setTimeout(() => {
+      if (currentLang === 'en') startGuide();
+    }, 800);
+  });
+
+  const guideBtn = document.getElementById('guideButton');
+  guideBtn.addEventListener('click', startGuide);
+
+  // Language buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+  });
+
+  // Expose for any external
+  window.setLanguage = setLanguage;
+</script>
+</body>
+</html>

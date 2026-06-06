@@ -67,7 +67,7 @@
       margin-top: -4px;
       font-weight: 500;
     }
-    .nav-actions { display: flex; gap: 1rem; align-items: center; }
+    .nav-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
     .lang-switch {
       display: flex; gap: 0.3rem; background: rgba(255,255,255,0.05);
       padding: 0.2rem 0.6rem; border-radius: 2rem;
@@ -85,6 +85,15 @@
       transition: 0.2s;
     }
     .btn-ecosystem:hover { background: #2dd4bf30; border-color: #7dd3fc; }
+    .hbtn {
+      background: rgba(16,185,255,0.15); border: 1px solid #2dd4bfaa;
+      padding: 0.5rem 1.2rem; border-radius: 2rem; font-weight: 600;
+      text-decoration: none; color: #b6f0ff; font-size: 0.9rem;
+      transition: 0.2s;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .hbtn:hover { background: #2dd4bf30; border-color: #7dd3fc; }
     h2 {
       font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;
       background: linear-gradient(115deg, #e0f2fe, #bbaaff);
@@ -239,6 +248,7 @@
       .guide-btn { width: 48px; height: 48px; font-size: 1.5rem; bottom: 1rem; left: 1rem; }
       .btn-secondary { margin-left: 0; margin-top: 0.5rem; }
       .profile-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .nav-actions { gap: 0.5rem; }
     }
   </style>
 </head>
@@ -275,6 +285,7 @@
         <button class="lang-btn active" data-lang="en">EN</button>
       </div>
       <a href="https://laffitacamargof-create.github.io/quantum-computing-open-lab/" target="_blank" class="btn-ecosystem">🚀 <span data-i18n="nav_live">Live Ecosystem</span></a>
+      <a href="roadmap.html" class="hbtn">📅 <span data-i18n="nav_roadmap">Roadmap</span></a>
     </div>
   </div>
 
@@ -374,7 +385,7 @@
       <div class="card">
         <div class="card-icon">🛒</div>
         <h3 data-i18n="bm_store_title">Quantum Puzzle Store</h3>
-        <p data-i18n="bm_store_desc">Developers publish Quantum Apps or tools. QCOL takes a 20% commission on each sale or subscription. The rest goes to the developer. We grow the worldwide ecosystem of quantum solutions, expanding access and usage for everyone.</p>
+        <p data-i18n="bm_store_desc">Developers publish Quantum Apps or tools. QCOL takes a 20% commission on each sale or subscription. The rest goes to the developer. We grow the worldwide ecosystem of quantum solutions and also its access and use.</p>
       </div>
       <div class="card">
         <div class="card-icon">🔧</div>
@@ -467,11 +478,12 @@
 <button class="guide-btn" id="guideButton" aria-label="Interactive guide">🗣️</button>
 
 <script>
-  // ==================== TRADUCCIONES ====================
+  // ==================== TRADUCCIONES (con nueva clave para roadmap) ====================
   const translations = {
     es: {
       tagline: "Sistema Operativo Cuántico en la Nube · Neutral · Abierto · IA Nativa",
       nav_live: "Ecosistema Vivo",
+      nav_roadmap: "Hoja de ruta",
       hero_title: "El primer ecosistema cuántico abierto diseñado para la adopción masiva: cero codificación y cero experiencia técnica para los usuarios finales",
       hero_sub: "QCOL es una startup deep-tech que construye un sistema operativo cuántico abierto en la nube. Sin programación. Sin título en física cuántica. Sin dependencia de proveedores. Cualquier persona, en cualquier lugar, puede usar computación cuántica.",
       explore_btn: "Ver para quién es QCOL →",
@@ -520,6 +532,7 @@
     en: {
       tagline: "Quantum Cloud OS · Neutral · Open · AI-Native",
       nav_live: "Live Ecosystem",
+      nav_roadmap: "Roadmap",
       hero_title: "The first open quantum ecosystem designed for massive adoption: zero coding & zero technical expertise for end users",
       hero_sub: "QCOL is a deep-tech startup building an open quantum operating system in the cloud. No programming. No quantum physics degree. No vendor lock-in. Any person, anywhere, can harness quantum computing.",
       explore_btn: "See who QCOL is for →",
@@ -549,7 +562,7 @@
       notebook_question: "📘❓ What is an interactive notebook booklet?", notebook_answer: "It is a new educational standard that combines the theory of a book, the practice of programming, and the experimentation of a laboratory. You can run the notebook without modifying the theory, write in its markdown cells, execute code, make changes without saving them, and reset to the original code at any time.",
       vision_title: "🔭 Our vision: quantum computing for every human being", vision_text: "We are building the first quantum ecosystem that requires zero programming and zero technical expertise. A global, open standard that is not owned by any manufacturer, where anyone – from a child to an entrepreneur – can harness quantum power through Quantum Apps as easy as the apps on their phone.",
       business_title: "💰 Business model: sustainable & fair",
-      bm_store_title: "Quantum Puzzle Store", bm_store_desc: "Developers publish Quantum Apps or tools. QCOL takes a 20% commission on each sale or subscription. The rest goes to the developer. We grow the worldwide ecosystem of quantum solutions, expanding access and usage for everyone.",
+      bm_store_title: "Quantum Puzzle Store", bm_store_desc: "Developers publish Quantum Apps or tools. QCOL takes a 20% commission on each sale or subscription. The rest goes to the developer. We grow the worldwide ecosystem of quantum solutions and also its access and use.",
       bm_custom_title: "Customization layers for manufacturers", bm_custom_desc: "Hardware vendors can integrate their quantum processors for free (we don't resell APIs). They pay for custom adaptation layers and dedicated support.",
       bm_private_title: "Private apps for companies & institutions", bm_private_desc: "Organizations can deploy private Quantum Apps/tools inside the ecosystem, accessible only by their members. They pay a hosting and maintenance fee.",
       bm_quality_title: "App Quality & Ecosystem Health", bm_quality_desc: "Useless or malicious apps naturally fail: users won't buy inefficient apps that waste quantum hardware or deliver no value. In addition, QCOL performs reviews and community beta testing. Good solutions are promoted organically through incentives, ratings, and transparent supervision. This ensures only useful, well‑built apps thrive.",
