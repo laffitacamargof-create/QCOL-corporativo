@@ -249,6 +249,87 @@
       .btn-secondary { margin-left: 0; margin-top: 0.5rem; }
       .profile-grid { grid-template-columns: 1fr; gap: 1rem; }
       .nav-actions { gap: 0.5rem; }
+      .startup-counter { flex-direction: column; gap: 0.6rem; text-align: center; }
+      .counter-units { gap: 0.5rem; }
+      .counter-unit { min-width: 52px; padding: 0.5rem 0.6rem; }
+      .counter-num { font-size: 1.4rem; }
+    }
+    .startup-counter {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: rgba(0, 20, 40, 0.6);
+      border: 1px solid rgba(0,255,221,0.25);
+      border-radius: 2rem;
+      padding: 0.9rem 1.8rem;
+      margin: 2rem 0 0 0;
+      backdrop-filter: blur(6px);
+      flex-wrap: wrap;
+    }
+    .counter-label {
+      font-size: 0.8rem;
+      color: #8b9aff;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .counter-label span {
+      display: block;
+      font-size: 0.65rem;
+      color: #2dd4bf;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+    }
+    .counter-units {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .counter-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(45,212,191,0.07);
+      border: 1px solid rgba(45,212,191,0.2);
+      border-radius: 1rem;
+      padding: 0.6rem 0.9rem;
+      min-width: 60px;
+    }
+    .counter-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #00ffdd;
+      text-shadow: 0 0 14px rgba(0,255,221,0.6);
+      line-height: 1;
+    }
+    .counter-unit-label {
+      font-size: 0.6rem;
+      color: #8b9aff;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+    .counter-sep {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.4rem;
+      color: rgba(45,212,191,0.4);
+      margin-bottom: 0.5rem;
+    }
+    .counter-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00ffdd;
+      box-shadow: 0 0 8px #00ffdd;
+      animation: pulse-dot 1s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
     }
   </style>
 </head>
@@ -296,6 +377,23 @@
     <div style="margin-top: 2rem;">
       <a href="#profiles" class="btn-primary"><span data-i18n="explore_btn">See who QCOL is for →</span></a>
       <a href="https://drive.google.com/file/d/1De589shYZWqV6ylhXprfSNnywbDrQVBl/view?usp=sharing" target="_blank" class="btn-secondary">🎥 Official Presentation Video</a>
+    </div>
+
+    <!-- STARTUP AGE COUNTER -->
+    <div class="startup-counter" id="startupCounter">
+      <div class="counter-pulse"></div>
+      <div>
+        <div class="counter-label">
+          <span>⚡ QCOL is live</span>
+          Founded March 2025
+        </div>
+      </div>
+      <div class="counter-units">
+        <div class="counter-unit">
+          <span class="counter-num" id="cnt-days">0</span>
+          <span class="counter-unit-label" id="lbl-days">Days</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -766,6 +864,81 @@
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
   });
+
+  // ==================== STARTUP AGE COUNTER ====================
+  const LAUNCH_DATE = new Date('2026-03-01T00:00:00Z');
+
+  const counterLabels = {
+    en: { founded: 'Founded March 2026', live: '⚡ QCOL is live', days: 'Days', hours: 'Hours', mins: 'Mins', secs: 'Secs', syncing: 'Syncing time...', synced: '🌐 Internet time', local: '🖥 Local time' },
+    es: { founded: 'Fundada en marzo 2026', live: '⚡ QCOL en marcha', days: 'Días', hours: 'Horas', mins: 'Mins', secs: 'Segs', syncing: 'Sincronizando...', synced: '🌐 Hora de internet', local: '🖥 Hora local' }
+  };
+
+  let timeOffset = 0; // ms difference between internet time and local clock
+  let syncLabel = 'syncing';
+
+  function getNow() {
+    return new Date(Date.now() + timeOffset);
+  }
+
+  function updateCounter() {
+    const now = getNow();
+    const diff = now - LAUNCH_DATE;
+    if (diff < 0) return;
+    const days = Math.floor(diff / 86400000);
+    document.getElementById('cnt-days').textContent = days;
+  }
+
+  function applyCounterLang(lang) {
+    const l = counterLabels[lang] || counterLabels.en;
+    const label = document.querySelector('#startupCounter .counter-label');
+    if (label) {
+      label.innerHTML = `<span>${l.live} &nbsp;<em style="font-size:0.6rem;color:#2dd4bf;font-style:normal;" id="sync-status">${l[syncLabel]}</em></span>${l.founded}`;
+    }
+    document.getElementById('lbl-days').textContent = l.days;
+  }
+
+  async function syncInternetTime() {
+    try {
+      const t0 = Date.now();
+      const res = await fetch('https://worldtimeapi.org/api/ip', { cache: 'no-store' });
+      const t1 = Date.now();
+      if (!res.ok) throw new Error('bad response');
+      const data = await res.json();
+      const serverMs = new Date(data.datetime).getTime();
+      const latency = (t1 - t0) / 2;
+      timeOffset = (serverMs + latency) - t1;
+      syncLabel = 'synced';
+    } catch {
+      // fallback: try a second public NTP-over-HTTP endpoint
+      try {
+        const t0 = Date.now();
+        const res = await fetch('https://timeapi.io/api/time/current/zone?timeZone=UTC', { cache: 'no-store' });
+        const t1 = Date.now();
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        const serverMs = new Date(`${data.date}T${data.time}Z`).getTime();
+        timeOffset = (serverMs + (t1 - t0) / 2) - t1;
+        syncLabel = 'synced';
+      } catch {
+        syncLabel = 'local'; // silently use local clock
+      }
+    }
+    applyCounterLang(currentLang);
+  }
+
+  // Hook into language switching
+  const _originalSetLanguage = window.setLanguage;
+  window.setLanguage = async function(lang) {
+    await _originalSetLanguage(lang);
+    applyCounterLang(lang);
+  };
+
+  applyCounterLang('en');
+  updateCounter();
+  setInterval(updateCounter, 1000);
+  syncInternetTime();
+  // Re-sync every 5 minutes
+  setInterval(syncInternetTime, 5 * 60 * 1000);
 </script>
 </body>
 </html>
