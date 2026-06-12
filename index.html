@@ -873,11 +873,12 @@
     es: { founded: 'Fundada en marzo 2026', live: '⚡ QCOL en marcha', days: 'Días', hours: 'Horas', mins: 'Mins', secs: 'Segs', syncing: 'Sincronizando...', synced: '🌐 Hora de internet', local: '🖥 Hora local' }
   };
 
-  let timeOffset = 0; // ms difference between internet time and local clock
+  let timeOffset = 0; // ms difference between internet time and local clock, 0 = use local
   let syncLabel = 'syncing';
 
   function getNow() {
-    return new Date(Date.now() + timeOffset);
+    const offset = isNaN(timeOffset) ? 0 : timeOffset;
+    return new Date(Date.now() + offset);
   }
 
   function updateCounter() {
@@ -905,11 +906,12 @@
       if (!res.ok) throw new Error('bad response');
       const data = await res.json();
       const serverMs = new Date(data.datetime).getTime();
+      if (isNaN(serverMs)) throw new Error('bad datetime');
       const latency = (t1 - t0) / 2;
       timeOffset = (serverMs + latency) - t1;
+      if (isNaN(timeOffset)) timeOffset = 0;
       syncLabel = 'synced';
     } catch {
-      // fallback: try a second public NTP-over-HTTP endpoint
       try {
         const t0 = Date.now();
         const res = await fetch('https://timeapi.io/api/time/current/zone?timeZone=UTC', { cache: 'no-store' });
@@ -917,10 +919,13 @@
         if (!res.ok) throw new Error();
         const data = await res.json();
         const serverMs = new Date(`${data.date}T${data.time}Z`).getTime();
+        if (isNaN(serverMs)) throw new Error('bad datetime');
         timeOffset = (serverMs + (t1 - t0) / 2) - t1;
+        if (isNaN(timeOffset)) timeOffset = 0;
         syncLabel = 'synced';
       } catch {
-        syncLabel = 'local'; // silently use local clock
+        timeOffset = 0;
+        syncLabel = 'local';
       }
     }
     applyCounterLang(currentLang);
