@@ -221,6 +221,13 @@
       border-radius: 1rem;
       background: rgba(45,212,191,0.05);
     }
+    .card-highlight {
+      transition: all 0.3s ease;
+      box-shadow: 0 0 0 4px #2dd4bf, 0 0 0 12px rgba(45,212,191,0.4);
+      border-radius: 2rem;
+      background: rgba(45,212,191,0.08) !important;
+      transform: translateY(-4px);
+    }
     .profile-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -401,18 +408,18 @@
   <div id="profiles" class="section">
     <h2 data-i18n="profiles_title">👥 Two profiles, one ecosystem</h2>
     <div class="profile-grid">
-      <div class="profile-card">
+      <div class="profile-card" id="card-profile1">
         <div class="profile-icon">🧑‍💻</div>
         <h3 data-i18n="profile_user_title">📱 I just want to USE quantum solutions</h3>
         <p data-i18n="profile_user_desc">Open any Quantum App from the Quantum Puzzle menu. Zero quantum knowledge required. Just use the app like any classical software – QCOL handles the quantum complexity in the cloud.</p>
       </div>
-      <div class="profile-card">
+      <div class="profile-card" id="card-profile2">
         <div class="profile-icon">👨‍🔬</div>
         <h3 data-i18n="profile_dev_title">🛠️ I want to CREATE new quantum solutions</h3>
         <p data-i18n="profile_dev_desc">Use Quantum App Studio to build your own apps. You need to understand the quantum problem you want to solve, but QCOL removes the complexity of programming hardware, managing the cloud, and integrating APIs. Focus on the logic, not the infrastructure.</p>
       </div>
     </div>
-    <div class="highlight" style="margin-top: 0.5rem;">
+    <div class="highlight" id="card-profile-note" style="margin-top: 0.5rem;">
       <p style="font-size: 0.95rem;" data-i18n="profile_note">⚛️ In summary: If you only want to run quantum-powered solutions → zero knowledge needed. If you want to build new quantum solutions → you need to understand the problem domain, but QCOL handles the hard technical layer (hardware, cloud, APIs) for you.</p>
     </div>
   </div>
@@ -433,9 +440,9 @@
   <div id="pillars-section" class="section">
     <h2 data-i18n="pillars_title">🧠 The three pillars of QCOL</h2>
     <div class="card-grid">
-      <div class="card"><div class="feature-badge" data-i18n="pillar1_badge">Pillar 1</div><div class="card-icon">🌐</div><h3 data-i18n="pillar1_title">Total Neutrality</h3><p data-i18n="pillar1_desc">We connect with IBM, Amazon, Google and any future quantum hardware via their public APIs and using their quantum libraries. We are a universal bridge – no vendor lock‑in.</p></div>
-      <div class="card"><div class="feature-badge" data-i18n="pillar2_badge">Pillar 2</div><div class="card-icon">✨</div><h3 data-i18n="pillar2_title">Radical Simplicity</h3><p data-i18n="pillar2_desc">Zero technical knowledge required. No programming, no math, no quantum physics. Just use a simple interface designed for anyone – even a child can use it, all thanks to QCOL's Quantum Apps.</p></div>
-      <div class="card"><div class="feature-badge" data-i18n="pillar3_badge">Pillar 3</div><div class="card-icon">🔓</div><h3 data-i18n="pillar3_title">Total Openness</h3><p data-i18n="pillar3_desc">Anyone with knowledge can collaborate within the ecosystem's framework and standards. You retain full intellectual property of your source code. The open standard ensures interoperability, not loss of ownership.</p></div>
+      <div class="card" id="card-pillar1"><div class="feature-badge" data-i18n="pillar1_badge">Pillar 1</div><div class="card-icon">🌐</div><h3 data-i18n="pillar1_title">Total Neutrality</h3><p data-i18n="pillar1_desc">We connect with IBM, Amazon, Google and any future quantum hardware via their public APIs and using their quantum libraries. We are a universal bridge – no vendor lock‑in.</p></div>
+      <div class="card" id="card-pillar2"><div class="feature-badge" data-i18n="pillar2_badge">Pillar 2</div><div class="card-icon">✨</div><h3 data-i18n="pillar2_title">Radical Simplicity</h3><p data-i18n="pillar2_desc">Zero technical knowledge required. No programming, no math, no quantum physics. Just use a simple interface designed for anyone – even a child can use it, all thanks to QCOL's Quantum Apps.</p></div>
+      <div class="card" id="card-pillar3"><div class="feature-badge" data-i18n="pillar3_badge">Pillar 3</div><div class="card-icon">🔓</div><h3 data-i18n="pillar3_title">Total Openness</h3><p data-i18n="pillar3_desc">Anyone with knowledge can collaborate within the ecosystem's framework and standards. You retain full intellectual property of your source code. The open standard ensures interoperability, not loss of ownership.</p></div>
     </div>
   </div>
 
@@ -443,10 +450,10 @@
   <div id="howitworks-section" class="section">
     <h2 data-i18n="arch_title">⚙️ How it works (without you noticing the complexity)</h2>
     <div class="card-grid">
-      <div class="card"><div class="card-icon">🤖</div><h3 data-i18n="arch2_title">Native AI: QuantumChat</h3><p data-i18n="arch2_desc">You speak or write your problem. QuantumChat translates it into quantum circuits or advises to find the best possible solution. No commands, no code – it responds in human language and gives you the code if you need it.</p></div>
-      <div class="card"><div class="card-icon">📱</div><h3 data-i18n="arch3_title">Quantum Apps</h3><p data-i18n="arch3_desc">Apps with a classic interface (Windows/Android) but quantum logic. Access them from the "Quantum Puzzle" menu option. We hide the complexity: you just use the app, QCOL runs in the cloud.</p></div>
-      <div class="card"><div class="card-icon">☁️</div><h3 data-i18n="arch4_title">Cloud execution</h3><p data-i18n="arch4_desc">All quantum power runs in the cloud, no special hardware needed. Simulators or real processors, automatic and transparent. The ecosystem connects to any quantum API through a universal hardware-agnostic layer.</p></div>
-      <div class="card"><div class="card-icon">🧩</div><h3 data-i18n="arch5_title">Infinite puzzle</h3><p data-i18n="arch5_desc">New quantum hardware appears? We integrate it behind the scenes. You never have to learn anything new. It just works.</p></div>
+      <div class="card" id="card-arch2"><div class="card-icon">🤖</div><h3 data-i18n="arch2_title">Native AI: QuantumChat</h3><p data-i18n="arch2_desc">You speak or write your problem. QuantumChat translates it into quantum circuits or advises to find the best possible solution. No commands, no code – it responds in human language and gives you the code if you need it.</p></div>
+      <div class="card" id="card-arch3"><div class="card-icon">📱</div><h3 data-i18n="arch3_title">Quantum Apps</h3><p data-i18n="arch3_desc">Apps with a classic interface (Windows/Android) but quantum logic. Access them from the "Quantum Puzzle" menu option. We hide the complexity: you just use the app, QCOL runs in the cloud.</p></div>
+      <div class="card" id="card-arch4"><div class="card-icon">☁️</div><h3 data-i18n="arch4_title">Cloud execution</h3><p data-i18n="arch4_desc">All quantum power runs in the cloud, no special hardware needed. Simulators or real processors, automatic and transparent. The ecosystem connects to any quantum API through a universal hardware-agnostic layer.</p></div>
+      <div class="card" id="card-arch5"><div class="card-icon">🧩</div><h3 data-i18n="arch5_title">Infinite puzzle</h3><p data-i18n="arch5_desc">New quantum hardware appears? We integrate it behind the scenes. You never have to learn anything new. It just works.</p></div>
     </div>
   </div>
 
@@ -454,13 +461,13 @@
   <div id="tools-section" class="section">
     <h2 data-i18n="specialists_title">🔬 For specialists: advanced quantum tools</h2>
     <div class="card-grid">
-      <div class="card"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><line x1="2" y1="14" x2="38" y2="14" stroke="#004488" stroke-width="1.5" stroke-dasharray="3 2"/><line x1="2" y1="26" x2="38" y2="26" stroke="#004488" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="5" y="10" width="8" height="8" rx="2" fill="rgba(0,136,255,.2)" stroke="#0088ff" stroke-width="1.5"/><text x="9" y="16" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold" fill="#00ccff">H</text><circle cx="9" cy="26" r="2.5" fill="#00ffdd"/><line x1="9" y1="18" x2="9" y2="23.5" stroke="#00ffdd" stroke-width="1.2"/><circle cx="9" cy="26" r="2.5" fill="none" stroke="#00ffdd" stroke-width="1.2"/><line x1="6.5" y1="26" x2="11.5" y2="26" stroke="#00ffdd" stroke-width="1.2"/><g transform="translate(23,15) scale(1.1)"><circle cx="6" cy="6" r="3.5" fill="none" stroke="#00ccff" stroke-width="1.8"/><path d="M6 0v2M6 10v2M0 6h2M10 6h2M1.8 1.8l1.4 1.4M8.8 8.8l1.4 1.4M1.8 10.2l1.4-1.4M8.8 3.2l1.4-1.4" stroke="#00ccff" stroke-width="1.3" stroke-linecap="round"/></g></svg></div><h3 data-i18n="tool_architect_title">⚙️ QUANTUM OPEN LAB</h3><p data-i18n="tool_architect_desc">Visual quantum circuit editor with real Python execution (Qiskit). Design and simulate quantum circuits, save them to your account.</p></div>
-      <div class="card"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><line x1="2" y1="14" x2="38" y2="14" stroke="#4a2a7a" stroke-width="1.5" stroke-dasharray="3 2"/><line x1="2" y1="26" x2="38" y2="26" stroke="#4a2a7a" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="5" y="10" width="8" height="8" rx="2" fill="rgba(189,147,249,.15)" stroke="#bd93f9" stroke-width="1.5"/><text x="9" y="16" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold" fill="#bd93f9">H</text><g transform="translate(23,15) scale(1.1)"><circle cx="6" cy="6" r="3.5" fill="none" stroke="#bd93f9" stroke-width="1.8"/><path d="M6 0v2M6 10v2M0 6h2M10 6h2M1.8 1.8l1.4 1.4M8.8 8.8l1.4 1.4M1.8 10.2l1.4-1.4M8.8 3.2l1.4-1.4" stroke="#bd93f9" stroke-width="1.3" stroke-linecap="round"/></g></svg></div>
+      <div class="card" id="card-tool1"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><line x1="2" y1="14" x2="38" y2="14" stroke="#004488" stroke-width="1.5" stroke-dasharray="3 2"/><line x1="2" y1="26" x2="38" y2="26" stroke="#004488" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="5" y="10" width="8" height="8" rx="2" fill="rgba(0,136,255,.2)" stroke="#0088ff" stroke-width="1.5"/><text x="9" y="16" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold" fill="#00ccff">H</text><circle cx="9" cy="26" r="2.5" fill="#00ffdd"/><line x1="9" y1="18" x2="9" y2="23.5" stroke="#00ffdd" stroke-width="1.2"/><circle cx="9" cy="26" r="2.5" fill="none" stroke="#00ffdd" stroke-width="1.2"/><line x1="6.5" y1="26" x2="11.5" y2="26" stroke="#00ffdd" stroke-width="1.2"/><g transform="translate(23,15) scale(1.1)"><circle cx="6" cy="6" r="3.5" fill="none" stroke="#00ccff" stroke-width="1.8"/><path d="M6 0v2M6 10v2M0 6h2M10 6h2M1.8 1.8l1.4 1.4M8.8 8.8l1.4 1.4M1.8 10.2l1.4-1.4M8.8 3.2l1.4-1.4" stroke="#00ccff" stroke-width="1.3" stroke-linecap="round"/></g></svg></div><h3 data-i18n="tool_architect_title">⚙️ QUANTUM OPEN LAB</h3><p data-i18n="tool_architect_desc">Visual quantum circuit editor with real Python execution (Qiskit). Design and simulate quantum circuits, save them to your account.</p></div>
+      <div class="card" id="card-tool2"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><line x1="2" y1="14" x2="38" y2="14" stroke="#4a2a7a" stroke-width="1.5" stroke-dasharray="3 2"/><line x1="2" y1="26" x2="38" y2="26" stroke="#4a2a7a" stroke-width="1.5" stroke-dasharray="3 2"/><rect x="5" y="10" width="8" height="8" rx="2" fill="rgba(189,147,249,.15)" stroke="#bd93f9" stroke-width="1.5"/><text x="9" y="16" text-anchor="middle" font-family="monospace" font-size="5" font-weight="bold" fill="#bd93f9">H</text><g transform="translate(23,15) scale(1.1)"><circle cx="6" cy="6" r="3.5" fill="none" stroke="#bd93f9" stroke-width="1.8"/><path d="M6 0v2M6 10v2M0 6h2M10 6h2M1.8 1.8l1.4 1.4M8.8 8.8l1.4 1.4M1.8 10.2l1.4-1.4M8.8 3.2l1.4-1.4" stroke="#bd93f9" stroke-width="1.3" stroke-linecap="round"/></g></svg></div>
         <h3 data-i18n="tool_notebook_title">📓 QUANTUM NOTEBOOK</h3>
         <p data-i18n="tool_notebook_desc">Create and edit complete quantum notebooks. Export to .ipynb. Only founders and administrators review before publishing to Projects. It combines with Quantum Open Lab in circuit cells to create quantum algorithms without needing to program.</p>
       </div>
-      <div class="card"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#00ccff" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="#00ccff" stroke-width="1.5"/></svg></div><h3 data-i18n="tool_projects_title">PROJECTS</h3><p data-i18n="tool_projects_desc">Explore and publish quantum computing projects. Share ideas, algorithms, circuits and interactive notebook booklets with the QCOL community.</p></div>
-      <div class="card"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="3" stroke="#ffd700" stroke-width="1.5"/><path d="M8 8L16 16M16 8L8 16" stroke="#ffd700" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="#ffd700" stroke-width="1.5" fill="none"/><path d="M4 4L8 8M20 20L16 16M4 20L8 16M20 4L16 8" stroke="#ffd700" stroke-width="1" stroke-dasharray="2 2"/></svg></div><h3 data-i18n="tool_studio_title">🛠️ QUANTUM APP STUDIO</h3><p data-i18n="tool_studio_desc">Development environment to build Quantum Apps. Uses HTML for the interface and Python logic with quantum libraries Cirq, Qiskit, PennyLane already available. Create, test and deploy new quantum tools. Access it through Quantum Puzzle.</p></div>
+      <div class="card" id="card-tool3"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#00ccff" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="#00ccff" stroke-width="1.5"/></svg></div><h3 data-i18n="tool_projects_title">PROJECTS</h3><p data-i18n="tool_projects_desc">Explore and publish quantum computing projects. Share ideas, algorithms, circuits and interactive notebook booklets with the QCOL community.</p></div>
+      <div class="card" id="card-tool4"><div class="tool-icon-svg"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="3" stroke="#ffd700" stroke-width="1.5"/><path d="M8 8L16 16M16 8L8 16" stroke="#ffd700" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="#ffd700" stroke-width="1.5" fill="none"/><path d="M4 4L8 8M20 20L16 16M4 20L8 16M20 4L16 8" stroke="#ffd700" stroke-width="1" stroke-dasharray="2 2"/></svg></div><h3 data-i18n="tool_studio_title">🛠️ QUANTUM APP STUDIO</h3><p data-i18n="tool_studio_desc">Development environment to build Quantum Apps. Uses HTML for the interface and Python logic with quantum libraries Cirq, Qiskit, PennyLane already available. Create, test and deploy new quantum tools. Access it through Quantum Puzzle.</p></div>
     </div>
   </div>
 
@@ -480,28 +487,28 @@
   <div id="business-model-section" class="section">
     <h2 data-i18n="business_title">💰 Business model: sustainable & fair</h2>
     <div class="card-grid">
-      <div class="card">
+      <div class="card" id="card-bm1">
         <div class="card-icon">🛒</div>
         <h3 data-i18n="bm_store_title">Quantum Puzzle Store</h3>
         <p data-i18n="bm_store_desc">Developers publish Quantum Apps or tools. QCOL takes a 20% commission on each sale or subscription. The rest goes to the developer. We grow the worldwide ecosystem of quantum solutions and also its access and use.</p>
       </div>
-      <div class="card">
+      <div class="card" id="card-bm2">
         <div class="card-icon">🔧</div>
         <h3 data-i18n="bm_custom_title">Customization layers for manufacturers</h3>
         <p data-i18n="bm_custom_desc">Hardware vendors can integrate their quantum processors for free (we don't resell APIs). They pay for custom adaptation layers and dedicated support.</p>
       </div>
-      <div class="card">
+      <div class="card" id="card-bm3">
         <div class="card-icon">🏢</div>
         <h3 data-i18n="bm_private_title">Private apps for companies & institutions</h3>
         <p data-i18n="bm_private_desc">Organizations can deploy private Quantum Apps/tools inside the ecosystem, accessible only by their members. They pay a hosting and maintenance fee.</p>
       </div>
-      <div class="card">
+      <div class="card" id="card-bm4">
         <div class="card-icon">🛡️</div>
         <h3 data-i18n="bm_quality_title">App Quality & Ecosystem Health</h3>
         <p data-i18n="bm_quality_desc">Useless or malicious apps naturally fail: users won't buy inefficient apps that waste quantum hardware or deliver no value. In addition, QCOL performs reviews and community beta testing. Good solutions are promoted organically through incentives, ratings, and transparent supervision. This ensures only useful, well‑built apps thrive.</p>
       </div>
     </div>
-    <div class="highlight" style="margin-top: 1rem;">
+    <div class="highlight" id="card-bm-note" style="margin-top: 1rem;">
       <p data-i18n="bm_note">✅ Integration of quantum hardware is always free. We believe in open access, not reselling APIs. Our revenue comes from value-added services, marketplace commissions, and private deployments.</p>
     </div>
   </div>
@@ -509,32 +516,32 @@
   <!-- POSICIONAMIENTO vs OTROS OS CUÁNTICOS -->
   <div id="positioning-section" class="section">
     <h2 data-i18n="positioning_title">🆚 How QCOL is different from other quantum operating systems</h2>
-    <div class="highlight" style="background: rgba(0,50,80,0.3);">
+    <div class="highlight" id="card-pos-intro" style="background: rgba(0,50,80,0.3);">
       <p data-i18n="positioning_intro">Most existing quantum operating systems (like Origin Pilot, Wuyue, or European/US research OS) are designed to <strong>manage local quantum hardware</strong> and require deep programming skills. They are not cloud-native, not app‑centric, and not built for mass adoption.</p>
     </div>
     <div class="card-grid" style="margin-top: 1rem;">
-      <div class="card">
+      <div class="card" id="card-pos1">
         <div class="card-icon">☁️</div>
         <h3 data-i18n="pos_cloud_title">Cloud‑native, not hardware‑local</h3>
         <p data-i18n="pos_cloud_desc">QCOL runs entirely in the cloud. You don't need your own quantum computer. Other OSs are tied to specific local machines (e.g., Origin Pilot for spin‑based quantum chips).</p>
       </div>
-      <div class="card">
+      <div class="card" id="card-pos2">
         <div class="card-icon">📱</div>
         <h3 data-i18n="pos_app_title">App ecosystem, not just an API</h3>
         <p data-i18n="pos_app_desc">QCOL is a complete app store and runtime for end‑users. Others are low‑level APIs for programmers – you still need to write quantum code.</p>
       </div>
-      <div class="card">
+      <div class="card" id="card-pos3">
         <div class="card-icon">🌍</div>
         <h3 data-i18n="pos_agnostic_title">Hardware‑agnostic by design</h3>
         <p data-i18n="pos_agnostic_desc">We integrate all vendors (IBM, Google, Amazon, Chinese manufacturers) into one universal layer. Competitors are usually locked to their own or a single nation's hardware.</p>
       </div>
-      <div class="card">
+      <div class="card" id="card-pos4">
         <div class="card-icon">🧑‍🎓</div>
         <h3 data-i18n="pos_enduser_title">Focused on end‑users, not just specialists</h3>
         <p data-i18n="pos_enduser_desc">Our goal is zero‑expertise adoption. Other quantum OSs are built for researchers who already know linear algebra and programming. They ignore the other 99% of potential users.</p>
       </div>
     </div>
-    <div class="info-box" style="margin-top: 1rem;">
+    <div class="info-box" id="card-pos-china" style="margin-top: 1rem;">
       <div class="question" data-i18n="positioning_china_question">🇨🇳 What about China's strategy (DeepSeek, Origin Pilot, Wuyue)?</div>
       <div class="answer" data-i18n="positioning_china_answer">China is aggressively developing its own quantum operating systems (Origin Pilot, Wuyue) and AI models (DeepSeek) to break Western dominance and establish a Chinese-led global standard. The strategy is twofold: first, achieve technological self-sufficiency to bypass US/EU sanctions; second, create a parallel quantum ecosystem that could undercut American and European quantum cloud services with cheaper, state-backed alternatives. However, like their Western counterparts, these Chinese OSs remain local, hardware‑specific, and require expert programming. They are not designed for mass adoption nor for end‑users. DeepSeek's open‑source AI approach hints at a similar quantum play: release basic tools for free to capture developers, then lock enterprises into a proprietary Chinese stack. None of them is building a neutral, cloud‑native, app‑centric ecosystem that works across all vendors. That is exactly what QCOL does – a truly open, hardware‑agnostic platform for the entire world.</div>
     </div>
@@ -573,6 +580,10 @@
   </div>
 </div>
 
+<div id="guide-banner" style="display:none;position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);z-index:999;background:rgba(0,20,40,0.95);border:1px solid #2dd4bf;border-radius:2rem;padding:0.8rem 1.4rem;align-items:center;gap:0.8rem;box-shadow:0 0 24px rgba(45,212,191,0.4);cursor:pointer;max-width:90vw;" onclick="document.getElementById('guideButton').click()">
+  <span style="font-size:1.5rem;">🗣️</span>
+  <span style="color:#2dd4bf;font-size:0.85rem;font-weight:600;">Tap to start the interactive voice guide</span>
+</div>
 <button class="guide-btn" id="guideButton" aria-label="Interactive guide">🗣️</button>
 
 <script>
@@ -686,128 +697,321 @@
   let synth = window.speechSynthesis;
   let selectedVoice = null;
 
-  async function getBestEnglishVoice() {
+  // ==================== VOICE SYSTEM ====================
+
+  let selectedVoiceEN = null;
+
+  function loadVoices() {
     return new Promise((resolve) => {
-      const getVoices = () => {
+      const pick = () => {
         const voices = synth.getVoices();
-        if (voices.length === 0) {
-          synth.onvoiceschanged = () => resolve(findBestEnglishVoice(synth.getVoices()));
-        } else {
-          resolve(findBestEnglishVoice(voices));
-        }
+        if (voices.length === 0) return;
+        let en = voices.find(v => v.lang === 'en-US' && (v.name.includes('Google') || v.name.includes('Natural')));
+        if (!en) en = voices.find(v => v.lang === 'en-US');
+        if (!en) en = voices.find(v => v.lang.startsWith('en'));
+        selectedVoiceEN = en || null;
+        resolve();
       };
-      getVoices();
+      if (synth.getVoices().length > 0) { pick(); }
+      else { synth.onvoiceschanged = () => { pick(); }; }
     });
   }
 
-  function findBestEnglishVoice(voices) {
-    let best = voices.find(v => v.lang === 'en-US' && (v.name.includes('Google') || v.name.includes('Natural')));
-    if (!best) best = voices.find(v => v.lang === 'en-US');
-    if (!best) best = voices.find(v => v.lang.startsWith('en'));
-    return best || null;
-  }
-
-  async function updateVoice() {
-    selectedVoice = await getBestEnglishVoice();
-  }
+    let keepAliveInterval = null;
 
   function stopSpeaking() {
-    if (currentUtterance) {
-      synth.cancel();
-      currentUtterance = null;
-    }
-    if (timeoutId) clearTimeout(timeoutId);
+    synth.cancel();
+    currentUtterance = null;
+    if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; }
+    if (keepAliveInterval) { clearInterval(keepAliveInterval); keepAliveInterval = null; }
   }
 
   function speakText(text, onEnd) {
-    if (currentLang !== 'en') return;
+    if (currentLang !== 'en') { if (onEnd) setTimeout(onEnd, 50); return; }
     stopSpeaking();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.85;
-    utterance.pitch = 1.0;
-    utterance.volume = 1;
-    if (selectedVoice) utterance.voice = selectedVoice;
-    utterance.onend = () => {
-      currentUtterance = null;
+    const allVoices = synth.getVoices();
+    const voice = allVoices.find(v => v.lang === 'en-US' && /google/i.test(v.name))
+               || allVoices.find(v => v.lang === 'en-US')
+               || allVoices.find(v => v.lang.startsWith('en'))
+               || selectedVoiceEN
+               || null;
+    const langCode = voice ? voice.lang : 'en-US';
+
+    const sentences = text.match(/[^.!?]+[.!?]*/g) || [text];
+    let idx = 0;
+    let done = false;
+
+    function finish() {
+      if (done) return;
+      done = true;
+      stopSpeaking();
       if (onEnd) onEnd();
-    };
-    utterance.onerror = () => {
-      currentUtterance = null;
-      if (onEnd) onEnd();
-    };
-    currentUtterance = utterance;
-    synth.speak(utterance);
-    timeoutId = setTimeout(() => {
-      if (currentUtterance) {
-        synth.cancel();
-        currentUtterance = null;
-        if (onEnd) onEnd();
+    }
+
+    function speakNext() {
+      if (done) return;
+      if (idx >= sentences.length) { finish(); return; }
+      const chunk = sentences[idx].trim();
+      idx++;
+      if (!chunk) { speakNext(); return; }
+      const utterance = new SpeechSynthesisUtterance(chunk);
+      utterance.lang = langCode;      // set lang first
+      utterance.rate = 0.88;
+      utterance.pitch = 1.0;
+      utterance.volume = 1;
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;  // override with voice's exact lang
       }
-    }, Math.max(text.length * 70, 5000));
+      utterance.onend = () => { if (!done) speakNext(); };
+      utterance.onerror = (e) => {
+        if (e.error === 'interrupted' || e.error === 'canceled') return;
+        if (!done) speakNext();
+      };
+      currentUtterance = utterance;
+      synth.speak(utterance);
+    }
+
+    keepAliveInterval = setInterval(() => {
+      if (synth.paused && !done) synth.resume();
+    }, 8000);
+
+    timeoutId = setTimeout(finish, Math.max(text.length * 90, 10000));
+    speakNext();
   }
 
-  function highlightElement(id) {
-    document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
+  // Debug: log available voices to console (remove after testing)
+  window.logVoices = () => {
+    const v = synth.getVoices();
+    console.log('All voices:', v.map(x => x.name + ' | ' + x.lang).join('\n'));
+    const es = v.filter(x => x.lang.startsWith('es'));
+    console.log('Spanish voices:', es.map(x => x.name + ' | ' + x.lang).join('\n'));
+  };
+
+  function clearAllHighlights() {
+    document.querySelectorAll('.section-highlight').forEach(el => el.classList.remove('section-highlight'));
+    document.querySelectorAll('.card-highlight').forEach(el => el.classList.remove('card-highlight'));
+  }
+
+  function highlightElement(id, isCard) {
+    clearAllHighlights();
     const el = document.getElementById(id);
     if (el) {
-      el.classList.add('section-highlight');
+      el.classList.add(isCard ? 'card-highlight' : 'section-highlight');
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
 
+  // ==================== GUIDE STEPS ====================
+  // Each step: { elementId, isCard, en, es }
   const guideSteps = [
-    { elementId: 'hero-section', textKey: 'step_hero' },
-    { elementId: 'profiles', textKey: 'step_profiles' },
-    { elementId: 'corporate-notice', textKey: 'step_notice' },
-    { elementId: 'barrier-section', textKey: 'step_barrier' },
-    { elementId: 'pillars-section', textKey: 'step_pillars' },
-    { elementId: 'howitworks-section', textKey: 'step_how' },
-    { elementId: 'tools-section', textKey: 'step_tools' },
-    { elementId: 'notebook-section', textKey: 'step_notebook' },
-    { elementId: 'vision-section', textKey: 'step_vision' },
-    { elementId: 'business-model-section', textKey: 'step_business' },
-    { elementId: 'positioning-section', textKey: 'step_positioning' },
-    { elementId: 'founder-section', textKey: 'step_founder' },
-    { elementId: 'demo-section', textKey: 'step_demo' }
+    {
+      elementId: 'hero-section', isCard: false,
+      en: "Welcome to QCOL. We are a deep-tech startup building the first open quantum ecosystem designed for massive adoption. This means zero coding and zero technical expertise required for end users who just want to use quantum solutions. Any person, anywhere in the world, can harness the power of quantum computing through our platform.",
+      es: "Bienvenido a QCOL. Somos una startup de tecnología profunda que construye el primer ecosistema cuántico abierto diseñado para la adopción masiva. Esto significa cero programación y cero conocimientos técnicos requeridos para los usuarios que simplemente quieren usar soluciones cuánticas. Cualquier persona, en cualquier lugar del mundo, puede aprovechar el poder de la computación cuántica a través de nuestra plataforma."
+    },
+    {
+      elementId: 'profiles', isCard: false,
+      en: "Two profiles, one ecosystem. QCOL serves two completely different types of users. Let me explain each one separately.",
+      es: "Dos perfiles, un ecosistema. QCOL sirve a dos tipos completamente diferentes de usuarios. Te explicaré cada uno por separado."
+    },
+    {
+      elementId: 'card-profile1', isCard: true,
+      en: "Profile one: I just want to USE quantum solutions. Open any Quantum App from the Quantum Puzzle menu. Zero quantum knowledge required. Just use the app like any classical software — QCOL handles the quantum complexity in the cloud for you.",
+      es: "Perfil uno: Solo quiero USAR soluciones cuánticas. Abre cualquier aplicación cuántica desde el menú Quantum Puzzle. No se requiere ningún conocimiento cuántico. Usa la aplicación como cualquier software clásico — QCOL maneja toda la complejidad cuántica en la nube por ti."
+    },
+    {
+      elementId: 'card-profile2', isCard: true,
+      en: "Profile two: I want to CREATE new quantum solutions. Use Quantum App Studio to build your own apps. You need to understand the quantum problem you want to solve, but QCOL removes the complexity of programming hardware, managing the cloud, and integrating APIs. Focus on the logic, not the infrastructure.",
+      es: "Perfil dos: Quiero CREAR nuevas soluciones cuánticas. Usa Quantum App Studio para construir tus propias aplicaciones. Necesitas entender el problema cuántico que quieres resolver, pero QCOL elimina la complejidad de programar hardware, gestionar la nube e integrar interfaces de programación. Concéntrate en la lógica, no en la infraestructura."
+    },
+    {
+      elementId: 'card-profile-note', isCard: true,
+      en: "In summary: if you only want to run quantum-powered solutions, zero knowledge is needed. If you want to build new quantum solutions, you need to understand the problem domain — but QCOL handles the hard technical layer, that is hardware, cloud, and APIs, for you.",
+      es: "En resumen: si solo quieres ejecutar soluciones cuánticas, no necesitas ningún conocimiento. Si quieres construir nuevas soluciones cuánticas, necesitas entender el dominio del problema — pero QCOL maneja la capa técnica compleja, es decir el hardware, la nube y las interfaces de programación, por ti."
+    },
+    {
+      elementId: 'corporate-notice', isCard: false,
+      en: "Important notice: this is the official corporate website of QCOL, a startup in early development. The Live Ecosystem demo is a functional preview based on simulations — it is not yet connected to real quantum hardware — and covers only fundamental aspects. Our goal here is to present the company vision, projects, and roadmap.",
+      es: "Aviso importante: este es el sitio web corporativo oficial de QCOL, una startup en desarrollo temprano. La demo del ecosistema en vivo es una vista previa funcional basada en simulaciones — aún no está conectada a hardware cuántico real — y cubre solo aspectos fundamentales. Nuestro objetivo aquí es presentar la visión de la empresa, sus proyectos y su hoja de ruta."
+    },
+    {
+      elementId: 'barrier-section', isCard: false,
+      en: "Until now, quantum computing was exclusive to experts who master linear algebra, Dirac notation, and multiple programming languages. With QCOL, that barrier completely disappears. Our platform uses Quantum Apps with simple interfaces designed for anyone — even a child can use them. Quantum power becomes universal.",
+      es: "Hasta ahora, la computación cuántica era exclusiva para expertos que dominan el álgebra lineal, la notación de Dirac y múltiples lenguajes de programación. Con QCOL, esa barrera desaparece por completo. Nuestra plataforma usa aplicaciones cuánticas con interfaces simples diseñadas para cualquier persona — incluso un niño puede usarlas. El poder cuántico se vuelve universal."
+    },
+    {
+      elementId: 'pillars-section', isCard: false,
+      en: "QCOL is built on three fundamental pillars. Let me explain each one.",
+      es: "QCOL se construye sobre tres pilares fundamentales. Te explicaré cada uno."
+    },
+    {
+      elementId: 'card-pillar1', isCard: true,
+      en: "Pillar one: Total Neutrality. We connect with IBM, Amazon, Google, and any future quantum hardware via their public APIs and using their own quantum libraries. We are a universal bridge — there is no vendor lock-in. You are never trapped with a single provider.",
+      es: "Pilar uno: Neutralidad Total. Nos conectamos con IBM, Amazon, Google y cualquier hardware cuántico futuro a través de sus interfaces de programación públicas y usando sus propias bibliotecas cuánticas. Somos un puente universal — no hay dependencia de ningún proveedor. Nunca estarás atrapado con un solo fabricante."
+    },
+    {
+      elementId: 'card-pillar2', isCard: true,
+      en: "Pillar two: Radical Simplicity. Zero technical knowledge required. No programming, no mathematics, no quantum physics. You just use a simple interface designed for anyone. Even a child can use QCOL, all thanks to the Quantum Apps layer that hides all complexity.",
+      es: "Pilar dos: Simplicidad Radical. Cero conocimientos técnicos requeridos. Sin programación, sin matemáticas, sin física cuántica. Solo usas una interfaz simple diseñada para cualquier persona. Incluso un niño puede usar QCOL, todo gracias a la capa de aplicaciones cuánticas que oculta toda la complejidad."
+    },
+    {
+      elementId: 'card-pillar3', isCard: true,
+      en: "Pillar three: Total Openness. Anyone with the knowledge can collaborate within the ecosystem's framework and standards. You retain full intellectual property of your source code. The open standard ensures interoperability — it does not mean loss of ownership.",
+      es: "Pilar tres: Apertura Total. Cualquier persona con conocimiento puede colaborar dentro del marco y los estándares del ecosistema. Conservas toda la propiedad intelectual de tu código fuente. El estándar abierto garantiza la interoperabilidad — no significa pérdida de propiedad."
+    },
+    {
+      elementId: 'howitworks-section', isCard: false,
+      en: "Now let me walk you through how QCOL works, without you ever noticing the underlying complexity. There are four components.",
+      es: "Ahora te explicaré cómo funciona QCOL, sin que notes en ningún momento la complejidad subyacente. Hay cuatro componentes."
+    },
+    {
+      elementId: 'card-arch2', isCard: true,
+      en: "First: Native AI — QuantumChat. You speak or write your problem in plain language. QuantumChat translates it into quantum circuits or advises you to find the best possible solution. No commands, no code. It responds in human language, and gives you the code only if you need it.",
+      es: "Primero: Inteligencia Artificial Nativa — QuantumChat. Hablas o escribes tu problema en lenguaje natural. QuantumChat lo traduce a circuitos cuánticos o te asesora para encontrar la mejor solución posible. Sin comandos, sin código. Responde en lenguaje humano y te da el código solo si lo necesitas."
+    },
+    {
+      elementId: 'card-arch3', isCard: true,
+      en: "Second: Quantum Apps. These are applications with a classic interface — like Windows or Android — but with quantum logic running underneath. You access them from the Quantum Puzzle menu. We hide all the complexity: you just use the app, and QCOL executes everything in the cloud.",
+      es: "Segundo: Aplicaciones Cuánticas. Son aplicaciones con una interfaz clásica — como Windows o Android — pero con lógica cuántica funcionando por debajo. Las accedes desde el menú Quantum Puzzle. Ocultamos toda la complejidad: tú solo usas la aplicación, y QCOL ejecuta todo en la nube."
+    },
+    {
+      elementId: 'card-arch4', isCard: true,
+      en: "Third: Cloud execution. All quantum power runs entirely in the cloud. You need no special hardware whatsoever. Whether it runs on simulators or real quantum processors is automatic and transparent to you. The ecosystem connects to any quantum API through a universal hardware-agnostic layer.",
+      es: "Tercero: Ejecución en la Nube. Todo el poder cuántico se ejecuta completamente en la nube. No necesitas ningún hardware especial. Si corre en simuladores o en procesadores cuánticos reales es automático y transparente para ti. El ecosistema se conecta a cualquier interfaz cuántica a través de una capa universal independiente del hardware."
+    },
+    {
+      elementId: 'card-arch5', isCard: true,
+      en: "Fourth: The Infinite Puzzle. When new quantum hardware appears in the world, we integrate it behind the scenes. You never have to learn anything new. You never have to migrate. It just works — automatically.",
+      es: "Cuarto: El Puzzle Infinito. Cuando aparece nuevo hardware cuántico en el mundo, lo integramos entre bastidores. Nunca tienes que aprender nada nuevo. Nunca tienes que migrar. Simplemente funciona — de forma automática."
+    },
+    {
+      elementId: 'tools-section', isCard: false,
+      en: "For specialists, QCOL also provides four advanced quantum tools. Let me describe each one.",
+      es: "Para los especialistas, QCOL también ofrece cuatro herramientas cuánticas avanzadas. Te describiré cada una."
+    },
+    {
+      elementId: 'card-tool1', isCard: true,
+      en: "Quantum Open Lab: a visual quantum circuit editor with real Python execution using Qiskit. You design and simulate quantum circuits graphically, and save them directly to your account.",
+      es: "Quantum Open Lab: un editor visual de circuitos cuánticos con ejecución real de Python usando Qiskit. Diseñas y simulas circuitos cuánticos de forma gráfica, y los guardas directamente en tu cuenta."
+    },
+    {
+      elementId: 'card-tool2', isCard: true,
+      en: "Quantum Notebook: create and edit complete quantum notebooks and export them to the ipynb format. It combines with Quantum Open Lab in circuit cells, so you can create full quantum algorithms without needing to program them from scratch. Only founders and administrators review notebooks before they are published to Projects.",
+      es: "Quantum Notebook: crea y edita cuadernos cuánticos completos y expórtalos al formato ipynb. Se combina con Quantum Open Lab en celdas de circuitos, para que puedas crear algoritmos cuánticos completos sin necesidad de programarlos desde cero. Solo los fundadores y administradores revisan los cuadernos antes de publicarlos en Proyectos."
+    },
+    {
+      elementId: 'card-tool3', isCard: true,
+      en: "Projects: explore and publish quantum computing projects. Share ideas, algorithms, circuits, and interactive notebook booklets with the entire QCOL community.",
+      es: "Proyectos: explora y publica proyectos de computación cuántica. Comparte ideas, algoritmos, circuitos y cuadernos interactivos con toda la comunidad de QCOL."
+    },
+    {
+      elementId: 'card-tool4', isCard: true,
+      en: "Quantum App Studio: the full development environment to build Quantum Apps. It uses HTML for the interface and Python logic, with the quantum libraries Cirq, Qiskit, and PennyLane already available. You create, test, and deploy new quantum tools. Access it through the Quantum Puzzle menu.",
+      es: "Quantum App Studio: el entorno de desarrollo completo para construir aplicaciones cuánticas. Usa HTML para la interfaz y lógica Python, con las bibliotecas cuánticas Cirq, Qiskit y PennyLane ya disponibles. Creas, pruebas y despliegas nuevas herramientas cuánticas. Accede a él a través del menú Quantum Puzzle."
+    },
+    {
+      elementId: 'notebook-section', isCard: false,
+      en: "What is an interactive notebook booklet? It is a new educational standard that combines the theory of a book, the practice of programming, and the experimentation of a laboratory — all in one place. You can run the notebook without modifying the theory, write in its markdown cells, execute code, make temporary changes without saving them, and reset to the original code at any time.",
+      es: "¿Qué es un cuaderno interactivo? Es un nuevo estándar educativo que combina la teoría de un libro, la práctica de la programación y la experimentación de un laboratorio — todo en un solo lugar. Puedes ejecutar el cuaderno sin modificar la teoría, escribir en sus celdas de texto enriquecido, ejecutar código, hacer cambios temporales sin guardarlos, y restablecer el código original en cualquier momento."
+    },
+    {
+      elementId: 'vision-section', isCard: false,
+      en: "Our vision is quantum computing for every human being. We are building the first quantum ecosystem that requires zero programming and zero technical expertise. A global open standard not owned by any manufacturer, where anyone — from a child to an entrepreneur — can harness quantum power through Quantum Apps, as easy as the apps on their phone.",
+      es: "Nuestra visión es la computación cuántica para cada ser humano. Estamos construyendo el primer ecosistema cuántico que no requiere programación ni conocimientos técnicos. Un estándar global abierto que no es propiedad de ningún fabricante, donde cualquier persona — desde un niño hasta un emprendedor — puede aprovechar el poder cuántico a través de aplicaciones cuánticas, tan fácil como las apps de su teléfono."
+    },
+    {
+      elementId: 'business-model-section', isCard: false,
+      en: "Our business model is sustainable and fair. Let me explain each revenue stream.",
+      es: "Nuestro modelo de negocio es sostenible y justo. Te explicaré cada fuente de ingresos."
+    },
+    {
+      elementId: 'card-bm1', isCard: true,
+      en: "Revenue stream one: Quantum Puzzle Store. Developers publish Quantum Apps or tools. QCOL takes a twenty percent commission on each sale or subscription. The remaining eighty percent goes directly to the developer. This grows the worldwide ecosystem of quantum solutions, and expands access and use for everyone.",
+      es: "Fuente de ingresos uno: Quantum Puzzle Store. Los desarrolladores publican aplicaciones cuánticas o herramientas. QCOL toma una comisión del veinte por ciento en cada venta o suscripción. El ochenta por ciento restante va directamente al desarrollador. Esto hace crecer el ecosistema mundial de soluciones cuánticas y amplía su acceso y uso para todos."
+    },
+    {
+      elementId: 'card-bm2', isCard: true,
+      en: "Revenue stream two: Customization layers for hardware manufacturers. Hardware vendors can integrate their quantum processors into QCOL for free — we do not resell APIs. They pay only for custom adaptation layers and dedicated technical support.",
+      es: "Fuente de ingresos dos: Capas de personalización para fabricantes de hardware. Los proveedores de hardware pueden integrar sus procesadores cuánticos en QCOL de forma gratuita — no revendemos interfaces de programación. Solo pagan por capas de adaptación personalizadas y soporte técnico dedicado."
+    },
+    {
+      elementId: 'card-bm3', isCard: true,
+      en: "Revenue stream three: Private apps for companies and institutions. Organizations can deploy private Quantum Apps and tools inside the ecosystem, accessible only by their own members. They pay a hosting and maintenance fee.",
+      es: "Fuente de ingresos tres: Aplicaciones privadas para empresas e instituciones. Las organizaciones pueden desplegar aplicaciones cuánticas y herramientas privadas dentro del ecosistema, accesibles solo por sus propios miembros. Pagan una tarifa de alojamiento y mantenimiento."
+    },
+    {
+      elementId: 'card-bm4', isCard: true,
+      en: "Revenue stream four: App Quality and Ecosystem Health. Useless or malicious apps naturally fail — users will not buy inefficient apps that waste quantum hardware or deliver no value. In addition, QCOL performs reviews and community beta testing. Good solutions are promoted organically through incentives, ratings, and transparent supervision. This ensures only useful, well-built apps thrive.",
+      es: "Fuente de ingresos cuatro: Calidad de aplicaciones y salud del ecosistema. Las aplicaciones inútiles o maliciosas fracasan de forma natural — los usuarios no comprarán aplicaciones ineficientes que desperdicien hardware cuántico o no aporten valor. Además, QCOL realiza revisiones y pruebas beta comunitarias. Las buenas soluciones se promueven orgánicamente mediante incentivos, calificaciones y supervisión transparente. Esto garantiza que solo prosperen las aplicaciones útiles y bien construidas."
+    },
+    {
+      elementId: 'card-bm-note', isCard: true,
+      en: "Important principle: integration of quantum hardware into QCOL is always completely free. We believe in open access, not in reselling APIs. Our revenue comes exclusively from value-added services, marketplace commissions, and private deployments.",
+      es: "Principio importante: la integración de hardware cuántico en QCOL es siempre completamente gratuita. Creemos en el acceso abierto, no en revender interfaces de programación. Nuestros ingresos provienen exclusivamente de servicios de valor agregado, comisiones del mercado y despliegues privados."
+    },
+    {
+      elementId: 'positioning-section', isCard: false,
+      en: "How is QCOL different from other quantum operating systems? Let me break it down.",
+      es: "¿En qué se diferencia QCOL de otros sistemas operativos cuánticos? Te lo explico."
+    },
+    {
+      elementId: 'card-pos-intro', isCard: true,
+      en: "Most existing quantum operating systems — like Origin Pilot, Wuyue, or European and US research systems — are designed to manage local quantum hardware and require deep programming skills. They are not cloud-native, not app-centric, and they are not built for mass adoption.",
+      es: "La mayoría de los sistemas operativos cuánticos existentes — como Origin Pilot, Wuyue, o los sistemas de investigación europeos y estadounidenses — están diseñados para gestionar hardware cuántico local y requieren profundos conocimientos de programación. No son nativos de la nube, no están centrados en aplicaciones, y no están construidos para la adopción masiva."
+    },
+    {
+      elementId: 'card-pos1', isCard: true,
+      en: "Difference one: QCOL is cloud-native, not hardware-local. You do not need your own quantum computer. Other operating systems are tied to specific local machines — for example, Origin Pilot is built for spin-based quantum chips only.",
+      es: "Diferencia uno: QCOL es nativo de la nube, no local al hardware. No necesitas tu propio ordenador cuántico. Otros sistemas operativos están vinculados a máquinas locales específicas — por ejemplo, Origin Pilot está construido solo para chips cuánticos basados en espín."
+    },
+    {
+      elementId: 'card-pos2', isCard: true,
+      en: "Difference two: QCOL is a complete app ecosystem, not just an API. We are a full app store and runtime for end-users. Others are low-level APIs for programmers — you still need to write quantum code to use them.",
+      es: "Diferencia dos: QCOL es un ecosistema de aplicaciones completo, no solo una interfaz de programación. Somos una tienda de aplicaciones y un entorno de ejecución completo para usuarios finales. Los demás son interfaces de bajo nivel para programadores — aún necesitas escribir código cuántico para usarlos."
+    },
+    {
+      elementId: 'card-pos3', isCard: true,
+      en: "Difference three: QCOL is hardware-agnostic by design. We integrate all vendors — IBM, Google, Amazon, Chinese manufacturers — into one universal layer. Competitors are usually locked to their own hardware or to a single nation's infrastructure.",
+      es: "Diferencia tres: QCOL es agnóstico al hardware por diseño. Integramos a todos los fabricantes — IBM, Google, Amazon, fabricantes chinos — en una capa universal. Los competidores generalmente están bloqueados a su propio hardware o a la infraestructura de una sola nación."
+    },
+    {
+      elementId: 'card-pos4', isCard: true,
+      en: "Difference four: QCOL is focused on end-users, not just specialists. Our goal is zero-expertise adoption. Other quantum operating systems are built for researchers who already know linear algebra and programming. They completely ignore the other ninety-nine percent of potential users. That is the gap QCOL fills.",
+      es: "Diferencia cuatro: QCOL está enfocado en los usuarios finales, no solo en especialistas. Nuestro objetivo es la adopción sin necesidad de experiencia previa. Otros sistemas operativos cuánticos están construidos para investigadores que ya conocen el álgebra lineal y la programación. Ignoran completamente al otro noventa y nueve por ciento de los usuarios potenciales. Esa es la brecha que QCOL llena."
+    },
+    {
+      elementId: 'card-pos-china', isCard: true,
+      en: "What about China's strategy with DeepSeek, Origin Pilot, and Wuyue? China is aggressively developing its own quantum operating systems and AI models to break Western dominance and establish a Chinese-led global standard. The strategy is twofold: first, achieve technological self-sufficiency to bypass US and EU sanctions; second, create a parallel quantum ecosystem that could undercut American and European quantum cloud services with cheaper, state-backed alternatives. However, like their Western counterparts, these Chinese systems remain local, hardware-specific, and require expert programming. They are not designed for mass adoption or for end-users. DeepSeek's open-source approach hints at a similar quantum play: release basic tools for free to capture developers, then lock enterprises into a proprietary Chinese stack. None of them is building a neutral, cloud-native, app-centric ecosystem that works across all vendors. That is exactly what QCOL does — a truly open, hardware-agnostic platform for the entire world.",
+      es: "¿Qué hay de la estrategia de China con DeepSeek, Origin Pilot y Wuyue? China está desarrollando agresivamente sus propios sistemas operativos cuánticos y modelos de inteligencia artificial para romper el dominio occidental y establecer un estándar global liderado por China. La estrategia es doble: primero, lograr la autosuficiencia tecnológica para eludir las sanciones de Estados Unidos y la Unión Europea; segundo, crear un ecosistema cuántico paralelo que pueda socavar los servicios de nube cuántica americanos y europeos con alternativas más baratas respaldadas por el Estado. Sin embargo, al igual que sus contrapartes occidentales, estos sistemas chinos siguen siendo locales, específicos del hardware y requieren programación experta. No están diseñados para la adopción masiva ni para usuarios finales. El enfoque de código abierto de DeepSeek sugiere una jugada cuántica similar: lanzar herramientas básicas de forma gratuita para captar desarrolladores y luego encerrar a las empresas en una pila china propietaria. Ninguno de ellos está construyendo un ecosistema neutral, nativo de la nube y centrado en aplicaciones que funcione en todos los fabricantes. Eso es exactamente lo que hace QCOL — una plataforma verdaderamente abierta e independiente del hardware para todo el mundo."
+    },
+    {
+      elementId: 'founder-section', isCard: false,
+      en: "The founder is Franci Laffita Camargo — a Nuclear Physics student at InSTEC, the University of Havana, and a former international Physics Olympiad competitor. He is building QCOL from Latin America for the world, with a systems perspective rather than a hardware perspective. His quote: QCOL exists because true neutrality and radical simplicity can only come from an independent startup. We do not protect any legacy — we protect access for everyone. You can contact him at laffitacamargof at gmail dot com, or find him on LinkedIn.",
+      es: "El fundador es Franci Laffita Camargo — estudiante de Física Nuclear en el InSTEC, la Universidad de La Habana, y ex competidor internacional de las Olimpiadas de Física. Está construyendo QCOL desde América Latina para el mundo, con una perspectiva de sistemas más que de hardware. Su cita: QCOL existe porque la verdadera neutralidad y la simplicidad radical solo pueden venir de una startup independiente. No protegemos ningún legado — protegemos el acceso para todos. Puedes contactarlo en laffitacamargof arroba gmail punto com, o encontrarlo en LinkedIn."
+    },
+    {
+      elementId: 'demo-section', isCard: false,
+      en: "Finally, you can try the fundamental demo right now. Our live preview includes QuantumChat, the quantum notebook, and collaborative tools — all running on simulators. It demonstrates the core concepts of the entire ecosystem. Click the button to access the demo preview.",
+      es: "Finalmente, puedes probar la demo fundamental ahora mismo. Nuestra vista previa en vivo incluye QuantumChat, el cuaderno cuántico y herramientas colaborativas — todo corriendo en simuladores. Demuestra los conceptos fundamentales de todo el ecosistema. Haz clic en el botón para acceder a la vista previa de la demo."
+    }
   ];
-
-  const guideTextsEn = {
-    step_hero: "Welcome to QCOL. We are a deep-tech startup building the first open quantum ecosystem designed for massive adoption. Zero coding and zero technical expertise are required for end users who just want to use quantum solutions.",
-    step_profiles: "There are two profiles in QCOL. If you only want to use quantum solutions, open any Quantum App from the Quantum Puzzle menu. You need zero quantum knowledge. If you want to create new quantum solutions, use Quantum App Studio. You need to understand the quantum problem you want to solve, but QCOL removes the complexity of programming hardware, managing the cloud, and integrating APIs.",
-    step_notice: "This is the official corporate website. The demo we link runs on simulators, not real quantum hardware, but shows the essence of our ecosystem.",
-    step_barrier: "We remove the technical barrier: no linear algebra, no programming. Our Quantum Apps have simple interfaces designed for anyone, even children.",
-    step_pillars: "Three pillars: Total neutrality – we connect via public APIs and libraries. Radical simplicity – zero technical knowledge. Total openness – you keep your IP, anyone can collaborate within standards.",
-    step_how: "How it works: QuantumChat translates your problem into quantum circuits, Quantum Apps hide the complexity, everything runs in the cloud, and the ecosystem is an infinite puzzle that integrates any future hardware.",
-    step_tools: "For specialists we offer advanced tools: Quantum Open Lab (visual circuit editor), Quantum Notebook (interactive notebooks), Projects (collaborative projects), and Quantum App Studio (create your own quantum apps with HTML and Python).",
-    step_notebook: "The interactive notebook booklet is a new educational standard: it combines book theory, programming practice, and lab experimentation. You can run code without modifying theory and reset to original.",
-    step_vision: "Our vision: quantum computing for every human being. A global open standard, owned by no one, where anyone can use Quantum Apps as easy as the apps on their phone.",
-    step_business: "Our business model: Quantum Puzzle Store takes 20% commission from app sales. Hardware manufacturers integrate for free and pay for custom layers. Companies can host private apps. Useless apps naturally fail; QCOL reviews and community beta testing promote good solutions organically.",
-    step_positioning: "Unlike other quantum operating systems such as Origin Pilot or Wuyue, which are local, hardware‑specific, and require programming, QCOL is cloud‑native, hardware‑agnostic, and focuses on end‑users. China's state‑backed quantum OSs remain expert‑only. QCOL fills the gap with a neutral, global, app‑centric platform.",
-    step_founder: "The founder is Franci Laffita Camargo, a Nuclear Physics student and former international Olympiad competitor. He builds QCOL from Latin America for the world, with a systems perspective. Contact: laffitacamargof@gmail.com and LinkedIn.",
-    step_demo: "Finally, you can try the fundamental demo with QuantumChat and collaborative tools, all running on simulators. It's the practical showcase of our ecosystem."
-  };
 
   function runGuideStep(index) {
     if (!guideActive) return;
     if (index >= guideSteps.length) {
       guideActive = false;
       currentStepIndex = 0;
-      document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
-      const finishMsg = "Guide finished. Explore the site on your own.";
-      speakText(finishMsg, null);
+      clearAllHighlights();
+      speakText("Interactive guide finished. You have seen every section and every card of QCOL. Feel free to explore the site on your own.", null);
       return;
     }
+    currentStepIndex = index;
     const step = guideSteps[index];
-    highlightElement(step.elementId);
-    const text = guideTextsEn[step.textKey];
-    if (text) {
-      speakText(text, () => {
-        if (guideActive) runGuideStep(index + 1);
-      });
-    } else {
+    highlightElement(step.elementId, step.isCard);
+    speakText(step.en, () => {
       if (guideActive) runGuideStep(index + 1);
-    }
+    });
   }
 
   function startGuide() {
@@ -816,24 +1020,23 @@
       stopSpeaking();
       guideActive = false;
       currentStepIndex = 0;
-      document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
+      clearAllHighlights();
       return;
     }
     guideActive = true;
     currentStepIndex = 0;
-    const introMsg = "Starting interactive guide for QCOL. I will explain each section of the site step by step.";
-    speakText(introMsg, () => {
+    speakText("Starting interactive guide for QCOL. I will explain every section and every card of the site, one by one.", () => {
       if (guideActive) runGuideStep(0);
     });
   }
 
   async function setLanguage(lang) {
-    if (lang === currentLang) return;
-    if (guideActive) {
+    const changing = lang !== currentLang;
+    if (changing && guideActive) {
       stopSpeaking();
       guideActive = false;
       currentStepIndex = 0;
-      document.querySelectorAll('.section, .info-box, .demo-notice').forEach(el => el.classList.remove('section-highlight'));
+      clearAllHighlights();
     }
     currentLang = lang;
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -844,26 +1047,55 @@
       if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
       else btn.classList.remove('active');
     });
-    if (lang === 'en') {
-      await updateVoice();
-      startGuide();
+    if (changing && lang === 'en') startGuide();
+  }
+
+  // ==================== AUTOSTART (requires user gesture on mobile) ====================
+  let voicesReady = false;
+
+  async function initAndStart() {
+    if (!voicesReady) {
+      await loadVoices();
+      voicesReady = true;
     }
+    startGuide();
   }
 
   window.addEventListener('load', async () => {
-    await updateVoice();
+    await loadVoices();
+    voicesReady = true;
+    // Try silent autostart — works on desktop; on Android it needs a gesture
+    // We fire a zero-duration utterance to unlock the audio context
+    try {
+      const unlock = new SpeechSynthesisUtterance('');
+      unlock.volume = 0;
+      unlock.onend = () => { startGuide(); };
+      unlock.onerror = () => { /* will need tap */ };
+      synth.speak(unlock);
+    } catch(e) { /* will need tap */ }
+
+    // Show banner as fallback if guide doesn't start within 2s
     setTimeout(() => {
-      if (currentLang === 'en') startGuide();
-    }, 800);
+      if (!guideActive) {
+        const banner = document.getElementById('guide-banner');
+        if (banner) banner.style.display = 'flex';
+      }
+    }, 2000);
   });
 
   const guideBtn = document.getElementById('guideButton');
-  guideBtn.addEventListener('click', startGuide);
+  guideBtn.addEventListener('click', () => {
+    const banner = document.getElementById('guide-banner');
+    if (banner) banner.style.display = 'none';
+    initAndStart();
+  });
 
   window.setLanguage = setLanguage;
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
   });
+
+
 
   // ==================== STARTUP AGE COUNTER ====================
   const LAUNCH_DATE = new Date('2026-03-01T00:00:00Z');
